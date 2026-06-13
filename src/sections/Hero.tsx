@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import { siteCopy, socialLinks } from "../data";
 import { Icon } from "../components/Icon";
@@ -19,6 +20,8 @@ export function Hero() {
   const frameRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const cursorFrame = useRef<number>();
+  const emailCloudTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isEmailCopied, setIsEmailCopied] = useState(false);
   const mediaPrefersReducedMotion =
     () =>
       typeof window !== "undefined" &&
@@ -85,7 +88,43 @@ export function Hero() {
       if (cursorFrame.current) {
         cancelAnimationFrame(cursorFrame.current);
       }
+
+      if (emailCloudTimer.current) {
+        clearTimeout(emailCloudTimer.current);
+      }
     };
+  }, []);
+
+  const copyEmailToClipboard = useCallback(async () => {
+    const email = siteCopy.email;
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = email;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        textarea.remove();
+      }
+
+      setIsEmailCopied(true);
+
+      if (emailCloudTimer.current) {
+        clearTimeout(emailCloudTimer.current);
+      }
+
+      emailCloudTimer.current = setTimeout(() => {
+        setIsEmailCopied(false);
+      }, 2600);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
   }, []);
 
   useEffect(() => {
@@ -181,19 +220,43 @@ export function Hero() {
               {siteCopy.hero.description}
             </p>
 
-            <div className="flex flex-wrap gap-2">
-              {socialLinks.map((link) => (
-                <SmartLink
-                  className="social-button"
-                  external={link.external ?? true}
-                  href={link.href}
-                  key={link.label}
-                  label={link.label}
-                >
-                  <Icon className="h-5 w-5" icon={link.icon} />
-                  <span className="sr-only">{link.label}</span>
-                </SmartLink>
-              ))}
+            <div className="hero-socials flex flex-wrap gap-2">
+              {socialLinks.map((link) =>
+                link.icon === "mail" ? (
+                  <span className="hero-social-copy" key={link.label}>
+                    <button
+                      aria-label={`Copy ${siteCopy.email}`}
+                      className="social-button focus-ring"
+                      onClick={copyEmailToClipboard}
+                      type="button"
+                    >
+                      <Icon className="h-5 w-5" icon={link.icon} />
+                      <span className="sr-only">{link.label}</span>
+                    </button>
+                    <span
+                      aria-live="polite"
+                      className={`hero-email-cloud ${
+                        isEmailCopied ? "is-visible" : ""
+                      }`}
+                      role="status"
+                    >
+                      <span>Jay&apos;s email copied to clipboard - </span>
+                      <small>{siteCopy.email}</small>
+                    </span>
+                  </span>
+                ) : (
+                  <SmartLink
+                    className="social-button"
+                    external={link.external ?? true}
+                    href={link.href}
+                    key={link.label}
+                    label={link.label}
+                  >
+                    <Icon className="h-5 w-5" icon={link.icon} />
+                    <span className="sr-only">{link.label}</span>
+                  </SmartLink>
+                )
+              )}
             </div>
 
             <motion.div

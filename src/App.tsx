@@ -11,7 +11,6 @@ import { Altimeter } from "./components/Altimeter";
 import { SiteNav } from "./components/SiteNav";
 import { siteMeta } from "./data";
 import { About } from "./sections/About";
-import { Approach } from "./sections/Approach";
 import { Channels } from "./sections/Channels";
 import { Connect } from "./sections/Connect";
 import { FlightPlan } from "./sections/FlightPlan";
@@ -73,7 +72,6 @@ function HomePage() {
         <TheLoop />
         <Systems />
         <LongGame />
-        <Approach />
         <Connect />
       </motion.main>
       <Altimeter />

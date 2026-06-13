@@ -28,11 +28,16 @@ function extractYouTubeId(value) {
   return /^[\w-]{11}$/.test(url) ? url : "";
 }
 
+const smartDashPattern = new RegExp(
+  `[${String.fromCharCode(0x2013)}${String.fromCharCode(0x2014)}]`,
+  "g"
+);
+
 function cleanText(value) {
   return String(value ?? "")
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201c\u201d]/g, '"')
-    .replace(/[\u2013\u2014]/g, "-")
+    .replace(smartDashPattern, "-")
     .replace(/[^\x20-\x7E]/g, "")
     .replace(/\s+/g, " ")
     .trim();

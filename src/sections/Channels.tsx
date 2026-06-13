@@ -79,35 +79,20 @@ function getResolvedShorts(channel: ShortsChannel) {
   const generated = feeds as {
     shorts?: Record<string, GeneratedShort[] | undefined>;
   };
-  const localById = new Map(channel.shorts.map((short) => [short.id, short]));
-  const resolved = (generated.shorts?.[channel.id] ?? []).reduce<ShortItem[]>(
-    (items, short) => {
-      const local = localById.get(short.videoId);
-
-      if (!local) {
-        return items;
-      }
-
-      items.push({
-        ...local,
-        title: short.title || local.title,
-        url: short.url || local.url,
-        publishedAt: short.publishedAt || local.publishedAt
-      });
-
-      return items;
-    },
-    []
+  const generatedById = new Map(
+    (generated.shorts?.[channel.id] ?? []).map((short) => [short.videoId, short])
   );
 
-  if (resolved.length === 0) {
-    return channel.shorts.slice(0, 4);
-  }
+  return channel.shorts.slice(0, 8).map((short) => {
+    const generatedShort = generatedById.get(short.id);
 
-  const resolvedIds = new Set(resolved.map((short) => short.id));
-  const localFill = channel.shorts.filter((short) => !resolvedIds.has(short.id));
-
-  return [...resolved, ...localFill].slice(0, 4);
+    return {
+      ...short,
+      title: generatedShort?.title || short.title,
+      url: generatedShort?.url || short.url,
+      publishedAt: generatedShort?.publishedAt || short.publishedAt
+    };
+  });
 }
 
 function FeatureChannel({
@@ -221,10 +206,7 @@ function FeatureChannel({
       />
 
       <div className="channel-feature-copy">
-        <p className="channel-kicker">
-          {"01 \u00b7 "}
-          {channel.genre}
-        </p>
+        <p className="channel-kicker">For {channel.genre}</p>
         <h3 className="channel-feature-title">{channel.name}</h3>
         <a
           aria-label={`Watch ${channel.name}`}
@@ -347,6 +329,7 @@ function ShortTile({
     >
       <video
         aria-label={`noMaaya Short preview: ${item.title}`}
+        autoPlay={!shouldPauseMotion}
         className="short-video"
         loop
         muted
@@ -358,9 +341,6 @@ function ShortTile({
       />
       <div className="short-tile-scrim" />
       <div className="channel-grain" />
-      <span aria-hidden="true" className="short-index">
-        {String(index + 1).padStart(2, "0")}
-      </span>
     </a>
   );
 }
@@ -383,41 +363,33 @@ function ShortsChannelBlock({
         } as CSSProperties
       }
     >
-      <div className="shorts-channel-header">
-        <a
-          aria-label={`02 \u00b7 ${channel.genre} \u00b7 ${channel.name}`}
-          className="shorts-channel-label focus-ring"
-          href={channel.url}
-          rel="noreferrer"
-          target="_blank"
-        >
-          <span>02</span>
-          <span aria-hidden="true">{"\u00b7"}</span>
-          <span>{channel.genre}</span>
-          <span aria-hidden="true">{"\u00b7"}</span>
-          <span>{channel.name}</span>
-        </a>
-        <a
-          aria-label={`Watch ${channel.name}`}
-          className="shorts-channel-watch focus-ring"
-          href={channel.url}
-          rel="noreferrer"
-          target="_blank"
-        >
-          Watch {channel.name}
-          <Icon className="h-4 w-4" icon="arrow" />
-        </a>
-      </div>
+      <div className="shorts-channel-shell">
+        <div className="shorts-rail" role="list">
+          {shorts.map((short, index) => (
+            <ShortTile
+              index={index}
+              item={short}
+              key={short.id}
+              shouldPauseMotion={shouldPauseMotion}
+            />
+          ))}
+        </div>
 
-      <div className="shorts-rail" role="list">
-        {shorts.map((short, index) => (
-          <ShortTile
-            index={index}
-            item={short}
-            key={short.id}
-            shouldPauseMotion={shouldPauseMotion}
-          />
-        ))}
+        <div className="shorts-channel-header">
+          <p className="channel-kicker shorts-channel-kicker">For {channel.genre}</p>
+          <h3 className="shorts-channel-title">{channel.name}</h3>
+          <p className="shorts-channel-copy">Short cuts into sharper questions.</p>
+          <a
+            aria-label={`Watch ${channel.name}`}
+            className="shorts-channel-watch focus-ring"
+            href={channel.url}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Watch
+            <Icon className="h-4 w-4" icon="arrow" />
+          </a>
+        </div>
       </div>
     </div>
   );

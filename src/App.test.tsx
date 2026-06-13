@@ -144,8 +144,8 @@ describe("Jay Gupta personal site v3", () => {
 
     expect(document.querySelector(".altimeter-chapter")).not.toBeInTheDocument();
     expect(document.querySelector(".altimeter-tape-svg")).toBeInTheDocument();
-    expect(document.querySelectorAll(".altimeter-major-tick")).toHaveLength(7);
-    expect(document.querySelectorAll(".altimeter-minor-tick")).toHaveLength(18);
+    expect(document.querySelectorAll(".altimeter-major-tick")).toHaveLength(6);
+    expect(document.querySelectorAll(".altimeter-minor-tick")).toHaveLength(15);
     expect(
       document.querySelectorAll('.altimeter-stop-hit[aria-hidden="true"]')
     ).toHaveLength(descentBands.filter((band) => band.inPlan).length);
@@ -188,7 +188,6 @@ describe("Jay Gupta personal site v3", () => {
       now: 5400,
       systems: 6900,
       journeys: 8400,
-      approach: 9900,
       connect: 11400
     });
 
@@ -207,7 +206,7 @@ describe("Jay Gupta personal site v3", () => {
     expect(
       within(descent).getByRole("link", { name: /Broadcast\s+FL280/i })
     ).toHaveAttribute("aria-current", "location");
-    expect(descent).toHaveAttribute("data-tape-progress", "0.0476");
+    expect(descent).toHaveAttribute("data-tape-progress", "0.0571");
 
     setMockScroll(3882);
 
@@ -219,20 +218,20 @@ describe("Jay Gupta personal site v3", () => {
     expect(
       within(descent).getByRole("link", { name: /Operations\s+FL210/i })
     ).toHaveAttribute("aria-current", "location");
-    expect(descent).toHaveAttribute("data-tape-progress", "0.1667");
+    expect(descent).toHaveAttribute("data-tape-progress", "0.2000");
 
     setMockScroll(9882);
 
-    expectAltimeterReadout(descent, "1,000 FT");
-    expect(within(descent).getByText("FL010")).toBeInTheDocument();
-    expect(within(descent).getByText("APPROACH")).toBeInTheDocument();
-    expect(descent).toHaveAttribute("data-mode", "APPROACH");
-    expect(descent).toHaveAttribute("data-active-stop", "approach");
-    expect(descent).toHaveAttribute("data-tape-progress", "0.8333");
+    expectAltimeterReadout(descent, "1,500 FT");
+    expect(within(descent).getByText("FL015")).toBeInTheDocument();
+    expect(within(descent).getByText("DESCENT")).toBeInTheDocument();
+    expect(descent).toHaveAttribute("data-mode", "DESCENT");
+    expect(descent).toHaveAttribute("data-active-stop", "journeys");
+    expect(descent).toHaveAttribute("data-tape-progress", "0.9000");
 
     setMockScroll(11000);
 
-    expectAltimeterReadout(descent, "300 FT");
+    expectAltimeterReadout(descent, "400 FT");
     expect(within(descent).getByText("GND")).toBeInTheDocument();
     expect(within(descent).getByText("LANDED")).toBeInTheDocument();
     expect(descent).toHaveAttribute("data-mode", "LANDED");
@@ -264,13 +263,13 @@ describe("Jay Gupta personal site v3", () => {
     expect(screen.getByRole("region", { name: "Journeys" })).toBeInTheDocument();
     expect(screen.queryByRole("region", { name: "Projects" })).not.toBeInTheDocument();
     expect(screen.getByRole("region", { name: "The Loop" })).toBeInTheDocument();
-    expect(screen.getByRole("region", { name: "Approach" })).toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Approach" })).not.toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
 
     expect(
       Array.from(
         document.querySelectorAll(
-          "main #work, main #operations, main #now, main #systems, main #journeys, main #approach, main #connect"
+          "main #work, main #operations, main #now, main #systems, main #journeys, main #connect"
         )
       ).map((section) => section.id)
     ).toEqual([
@@ -279,7 +278,6 @@ describe("Jay Gupta personal site v3", () => {
       "now",
       "systems",
       "journeys",
-      "approach",
       "connect"
     ]);
   });
@@ -301,7 +299,6 @@ describe("Jay Gupta personal site v3", () => {
       expect.objectContaining({ href: "#now", label: expect.stringMatching(/Inputs.*FL140/s) }),
       expect.objectContaining({ href: "#systems", label: expect.stringMatching(/Systems.*FL070/s) }),
       expect.objectContaining({ href: "#journeys", label: expect.stringMatching(/The Long Game.*FL030/s) }),
-      expect.objectContaining({ href: "#approach", label: expect.stringMatching(/Approach.*FL010/s) }),
       expect.objectContaining({ href: "#connect", label: expect.stringMatching(/Ground.*GND/s) })
     ]);
 
@@ -319,16 +316,16 @@ describe("Jay Gupta personal site v3", () => {
 
     const operations = screen.getByRole("region", { name: "Operations" });
     expect(
-      within(operations).getByRole("heading", { name: /Founder's Office — SalarySe/ })
+      within(operations).getByRole("heading", { name: /Founder's Office · SalarySe/ })
     ).toBeInTheDocument();
     expect(
       within(operations).getByRole("heading", {
-        name: /AI Advisor — an equity research firm/
+        name: /AI Advisor · an equity research firm/
       })
     ).toBeInTheDocument();
     expect(
       within(operations).getByRole("heading", {
-        name: /Design & Marketing — a real-estate developer/
+        name: /Design & Marketing · a real-estate developer/
       })
     ).toBeInTheDocument();
 
@@ -338,10 +335,10 @@ describe("Jay Gupta personal site v3", () => {
     expect(within(journeys).getByText(/Obsidian vault/)).toBeInTheDocument();
     expect(within(journeys).getByText("CAT 2025")).toBeInTheDocument();
     expect(within(journeys).getByText("XAT 2026")).toBeInTheDocument();
-
-    const approach = screen.getByRole("region", { name: "Approach" });
-    expect(within(approach).getByText("Business school.")).toBeInTheDocument();
-    expect(within(approach).getByText(/Sketches, not promises/)).toBeInTheDocument();
+    expect(within(journeys).getByText("Where it points next.")).toBeInTheDocument();
+    expect(within(journeys).getByText("Business school.")).toBeInTheDocument();
+    expect(within(journeys).getByText(/Sketches, not promises/)).toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Approach" })).not.toBeInTheDocument();
   });
 
   it("uses React Router navigation with About and Projects as their own pages", () => {
@@ -514,7 +511,7 @@ describe("Jay Gupta personal site v3", () => {
     });
     expect(rawChannels[1]).toMatchObject({
       name: "noMaaya",
-      genre: "Philosophy",
+      genre: "Ideas",
       type: "shorts",
       url: "https://www.youtube.com/@noMaaya",
       channelId: "UCJyzUk_Yr57x9jdoD2VbjRQ",
@@ -523,6 +520,16 @@ describe("Jay Gupta personal site v3", () => {
     expect(rawChannels.some((channel) => hasOwnValue(channel, "description"))).toBe(false);
     expect(rawChannels.some((channel) => hasOwnValue(channel, "stat"))).toBe(false);
     expect(rawChannels.every((channel) => channel.accent)).toBe(true);
+    expect((rawChannels[1].shorts as Array<{ id: string }>).map((short) => short.id)).toEqual([
+      "_3YDGP3IYfE",
+      "q8hfP5Zhx4I",
+      "Vpvi62765kU",
+      "k0FGDY1RoYU",
+      "5liOrkm9fNU",
+      "EqHlIS6lN4Q",
+      "JkQaf71KJ10",
+      "1XbuD-DzbuU"
+    ]);
   });
 
   it("renders Work as a two-channel video section without descriptions or stats", () => {
@@ -539,11 +546,10 @@ describe("Jay Gupta personal site v3", () => {
         ?.textContent?.replace(/\s+/g, " ")
         .trim()
     ).toBe("Broadcast");
-    expect(within(work).getByText(/01\s+\u00b7\s+Finance/)).toBeInTheDocument();
+    expect(within(work).getByText("For Finance")).toBeInTheDocument();
     expect(within(work).getByText("noRupaiyaa")).toBeInTheDocument();
-    expect(
-      within(work).getByRole("link", { name: /02\s+\u00b7\s+Philosophy\s+\u00b7\s+noMaaya/ })
-    ).toHaveAttribute("href", "https://www.youtube.com/@noMaaya");
+    expect(within(work).getByText("For Ideas")).toBeInTheDocument();
+    expect(within(work).getByRole("heading", { name: "noMaaya" })).toBeInTheDocument();
     expect(within(work).queryByText("Systems Lab")).not.toBeInTheDocument();
     expect(within(work).queryByText("Reading Desk")).not.toBeInTheDocument();
     expect(within(work).queryByText(/latest video/i)).not.toBeInTheDocument();
@@ -575,10 +581,21 @@ describe("Jay Gupta personal site v3", () => {
     );
 
     const shorts = within(work).getAllByLabelText(/noMaaya Short preview:/i);
-    expect(shorts).toHaveLength(4);
+    expect(shorts).toHaveLength(8);
+    expect(shorts.map((short) => short.getAttribute("src"))).toEqual([
+      "/media/nomaaya-_3YDGP3IYfE-clip.webm",
+      "/media/nomaaya-q8hfP5Zhx4I-clip.webm",
+      "/media/nomaaya-Vpvi62765kU-clip.webm",
+      "/media/nomaaya-k0FGDY1RoYU-clip.webm",
+      "/media/nomaaya-5liOrkm9fNU-clip.webm",
+      "/media/nomaaya-EqHlIS6lN4Q-clip.webm",
+      "/media/nomaaya-JkQaf71KJ10-clip.webm",
+      "/media/nomaaya-1XbuD-DzbuU-clip.webm"
+    ]);
     shorts.forEach((short) => {
       const video = short as HTMLVideoElement;
       expect(video).toHaveAttribute("poster");
+      expect(video.getAttribute("src")).toMatch(/-clip\.webm$/);
       expect(video).toHaveAttribute("preload", "metadata");
       expect(video.loop).toBe(true);
       expect(video.muted).toBe(true);
@@ -628,6 +645,8 @@ describe("Jay Gupta personal site v3", () => {
       name: /Open YouTube video:/i
     });
     expect(filmLinks).toHaveLength(loopFeed.videos.length * 2);
+    expect(within(loop).getByText(/click any thumbnail/i)).toBeInTheDocument();
+    expect(within(loop).getByText(/to play the video/i)).toBeInTheDocument();
     expect(filmLinks[0]).toHaveAttribute(
       "href",
       "https://www.youtube.com/watch?v=h6fcK_fRYaI"
@@ -644,9 +663,20 @@ describe("Jay Gupta personal site v3", () => {
     ).toHaveAttribute("href", siteCopy.spotify.playlistUrl);
     expect(within(loop).getByText("~J~")).toBeInTheDocument();
     expect(within(loop).getByText(/side a/i)).toBeInTheDocument();
+    expect(loop.querySelectorAll(".loop-tracks li span")).toHaveLength(0);
+    expect(within(loop).getByText("I Ain't Worried")).toBeInTheDocument();
     expect(
-      within(loop).getByRole("heading", { level: 3, name: "Books, on rotation." })
+      within(loop).getByText("There's Nothing Holdin' Me Back")
     ).toBeInTheDocument();
+    expect(within(loop).getByText("Rude")).toBeInTheDocument();
+    expect(within(loop).getByText("Viva La Vida")).toBeInTheDocument();
+    expect(
+      within(loop).getByRole("heading", { level: 3, name: "On the shelf." })
+    ).toBeInTheDocument();
+    expect(
+      within(loop).getByText("Reading that shapes my ideas, worldview and psyche.")
+    ).toBeInTheDocument();
+    expect(within(loop).queryByText(/Current shelf mark/i)).not.toBeInTheDocument();
     expect(
       within(loop).getByRole("img", { name: /Book cover: Why Bharat Matters/i })
     ).toHaveAttribute("src", "/media/books/why-bharat-matters.png");

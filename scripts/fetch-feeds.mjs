@@ -9,7 +9,7 @@ const outputPath = path.join(root, "src", "generated", "feeds.json");
 const feedSources = {
   youtube: [
     { id: "norupaiyaa", channelId: "UCobaq6e-B5QlGcwR8wU4DBA", type: "video", limit: 1 },
-    { id: "nomaaya", channelId: "UCJyzUk_Yr57x9jdoD2VbjRQ", type: "shorts", limit: 4 }
+    { id: "nomaaya", channelId: "UCJyzUk_Yr57x9jdoD2VbjRQ", type: "shorts", limit: 8 }
   ],
   substack: {
     feedUrl: ""
@@ -42,11 +42,16 @@ function decodeXml(value) {
     .replaceAll("&#39;", "'");
 }
 
+const smartDashPattern = new RegExp(
+  `[${String.fromCharCode(0x2013)}${String.fromCharCode(0x2014)}]`,
+  "g"
+);
+
 function cleanText(value) {
   return value
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201c\u201d]/g, '"')
-    .replace(/[\u2013\u2014]/g, "-")
+    .replace(smartDashPattern, "-")
     .replace(/[^\x20-\x7E]/g, "")
     .replace(/\s+/g, " ")
     .trim();

@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ChapterRule } from "../components/ChapterRule";
 import { descentBands, longGameCopy } from "../data";
+import { Approach } from "./Approach";
 
 const blockEase = [0.16, 1, 0.3, 1] as const;
 const band = descentBands.find((entry) => entry.id === "journeys");
@@ -47,12 +48,12 @@ export function LongGame() {
           />
         ) : null}
 
-        <div className="game-head">
-          <h2 className="game-heading">{longGameCopy.heading}</h2>
-          <p className="game-lede">{longGameCopy.lede}</p>
-        </div>
+        <div className="game-story-grid">
+          <div className="game-head">
+            <h2 className="game-heading">{longGameCopy.heading}</h2>
+            <p className="game-lede">{longGameCopy.lede}</p>
+          </div>
 
-        <div className="game-grid">
           <motion.article
             className="game-upsc"
             initial={shouldReduceMotion ? false : { opacity: 0, y: 26 }}
@@ -112,6 +113,8 @@ export function LongGame() {
             </div>
           </motion.article>
         </div>
+
+        <Approach />
       </div>
     </section>
   );

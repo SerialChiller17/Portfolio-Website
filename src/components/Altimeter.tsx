@@ -22,7 +22,7 @@ type SectionMark = {
   top: number;
 };
 
-type InstrumentMode = "CRUISE" | "DESCENT" | "APPROACH" | "LANDED";
+type InstrumentMode = "CRUISE" | "DESCENT" | "LANDED";
 
 type DescentState = {
   activeStop: DescentBand | null;
@@ -114,14 +114,13 @@ function interpolateAltitude(marks: SectionMark[], position: number) {
 function activeStopForAltitude(altitude: number) {
   const rounded = roundFeet(altitude);
   const firstStop = descentTapeStops[0];
-  const approachStop = descentTapeStops.find((stop) => stop.id === "approach");
   const groundStop = descentTapeStops.find((stop) => stop.id === "connect");
 
   if (!firstStop || rounded > firstStop.feet) {
     return null;
   }
 
-  if (approachStop && groundStop && rounded < approachStop.feet) {
+  if (groundStop && rounded < 500) {
     return groundStop;
   }
 
@@ -172,10 +171,6 @@ function tapeProgressForAltitude(altitude: number) {
 function modeForAltitude(altitude: number, activeStop: DescentBand | null) {
   if (activeStop?.id === "connect") {
     return "LANDED";
-  }
-
-  if (activeStop?.id === "approach") {
-    return "APPROACH";
   }
 
   if (altitude > DESCENT_FEET) {

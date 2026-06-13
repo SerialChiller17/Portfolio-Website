@@ -102,6 +102,29 @@ export function TheLoop() {
           and what he reads. <em>Here is mine.</em>
         </h2>
 
+        <div className="loop-reel-note">
+          <svg
+            aria-hidden="true"
+            className="loop-reel-arrow"
+            focusable="false"
+            viewBox="0 0 280 220"
+          >
+            <path
+              className="loop-reel-arrow-shadow"
+              d="M259 22C211 54 206 107 157 136C118 160 88 161 58 180"
+            />
+            <path
+              className="loop-reel-arrow-line"
+              d="M253 18C205 50 199 102 151 132C111 157 83 159 54 176"
+            />
+            <circle className="loop-reel-arrow-dot" cx="54" cy="176" r="4.25" />
+          </svg>
+          <p>
+            <span>click any thumbnail</span>
+            <b>to play the video</b>
+          </p>
+        </div>
+
         <section className="loop-film-block" aria-label="Watch">
           <div className="loop-film-head">
             <div className="loop-film-label">
@@ -178,9 +201,8 @@ export function TheLoop() {
               </div>
 
               <ul className="loop-tracks">
-                {loopCopy.spotifyTracks.map((track, index) => (
+                {loopCopy.spotifyTracks.map((track) => (
                   <li key={`${track.title}-${track.artist}`}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
                     <div>
                       <b>{track.title}</b> · {track.artist}
                     </div>
@@ -220,7 +242,6 @@ export function TheLoop() {
                 </div>
 
                 <div className="loop-book-feature-copy">
-                  <span>Current shelf mark</span>
                   <h4>{activeBook.title}</h4>
                   <p>{activeBook.author}</p>
                 </div>

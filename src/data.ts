@@ -59,7 +59,7 @@ export type LandscapeChannel = {
 export type ShortsChannel = {
   id: "nomaaya";
   name: "noMaaya";
-  genre: "Philosophy";
+  genre: "Ideas";
   type: "shorts";
   url: string;
   channelId: string;
@@ -106,7 +106,7 @@ export type ProofNumber = {
 };
 
 export const siteMeta = {
-  title: "Jay Gupta | Generalist — Content, Systems & Operations",
+  title: "Jay Gupta | Generalist: Content, Systems & Operations",
   description:
     "Jay Gupta never picked a lane: two YouTube channels past 6.3M views, AI systems that compress hours into minutes, founder's-office work, and four years in UPSC's top 1%. One long descent through all of it.",
   image: "/social-preview.png"
@@ -182,21 +182,12 @@ export const descentBands: DescentBand[] = [
     title: "The Long Game",
     fl: "FL030",
     feet: 3000,
-    blurb: "Four years in the top 1% of India's hardest exam.",
-    inPlan: true
-  },
-  {
-    id: "approach",
-    chapter: "06",
-    title: "Approach",
-    fl: "FL010",
-    feet: 1000,
-    blurb: "Where this is heading.",
+    blurb: "Training, pivots, and the next runways.",
     inPlan: true
   },
   {
     id: "connect",
-    chapter: "07",
+    chapter: "06",
     title: "Ground",
     fl: "GND",
     feet: 0,
@@ -278,7 +269,7 @@ export const siteCopy = {
     ] satisfies AboutPrinciple[],
     numbers: [
       { value: "6.3M+", label: "organic views across two channels, $0 spend" },
-      { value: "4x", label: "UPSC Mains — top 1% of 13L+ every attempt" },
+      { value: "4x", label: "UPSC Mains, top 1% of 13L+ every attempt" },
       { value: "80+", label: "videos, scripts, and experiments shipped" }
     ] satisfies ProofNumber[],
     timeline: [
@@ -312,11 +303,11 @@ export const siteCopy = {
     body: [
       "Master of none, though oftentimes better than master of one.",
       "Most people optimize for a lane. I optimized for range.",
-      "From finance and philosophy to AI systems, business operations, and creative work, each pursuit added another lens through which to understand the world.",
+      "From finance and ideas to AI systems, business operations, and creative work, each pursuit added another lens through which to understand the world.",
       "Viewed separately, they seem unrelated.",
       "Viewed together, they tell a single story: curiosity followed by execution."
     ],
-    instruction: "The descent, in chapters — jump to any altitude."
+    instruction: "The descent, in chapters. Jump to any altitude."
   },
   channelsHeading: [
     { text: "What I", className: "text-cream" },
@@ -338,7 +329,7 @@ export const siteCopy = {
     "Send a message. I'll pretend I wasn't waiting.",
     "Warning: sending a message may lead to a conversation."
   ],
-  footerLine: `wheels down — Jay Gupta · ${new Date().getFullYear()}`
+  footerLine: `wheels down · Jay Gupta · ${new Date().getFullYear()}`
 };
 
 export const loopCopy = {
@@ -347,13 +338,16 @@ export const loopCopy = {
     { title: "Beautiful Things", artist: "Benson Boone" },
     { title: "Those Eyes", artist: "New West" },
     { title: "blue", artist: "yung kai" },
-    { title: "I Think They Call This Love", artist: "Cover" }
+    { title: "I Think They Call This Love", artist: "Cover" },
+    { title: "I Ain't Worried", artist: "OneRepublic" },
+    { title: "There's Nothing Holdin' Me Back", artist: "Shawn Mendes" },
+    { title: "Rude", artist: "MAGIC!" },
+    { title: "Viva La Vida", artist: "Coldplay" }
   ] satisfies LoopTrack[],
   read: {
     label: "books and articles",
-    title: "Books, on rotation.",
-    note:
-      "The books I keep circling back to when I need better questions.",
+    title: "On the shelf.",
+    note: "Reading that shapes my ideas, worldview and psyche.",
     books: [
       {
         title: "Why Bharat Matters",
@@ -424,7 +418,7 @@ export const systemsCopy = {
       year: "2026",
       tagline: "A second brain for a watching habit.",
       description:
-        "Classifies what I watch, extracts LLM-written summaries, and files structured notes into Notion — then sends weekly learning reports with gap-based recommendations on what to study next.",
+        "Classifies what I watch, extracts LLM-written summaries, and files structured notes into Notion. Then sends weekly learning reports with gap-based recommendations on what to study next.",
       specs: [
         ["input", "hours of video"],
         ["output", "linked notes in Notion"],
@@ -450,7 +444,7 @@ export const systemsCopy = {
       year: "2025",
       tagline: "The audience never waits.",
       description:
-        "An n8n + LLM loop that drafts replies for roughly 150 comments a day across both channels, holding response time to about two minutes each — in my voice, not a bot's.",
+        "An n8n + LLM loop that drafts replies for roughly 150 comments a day across both channels, holding response time to about two minutes each, in my voice, not a bot's.",
       specs: [
         ["input", "~150 comments / day"],
         ["output", "replies that sound like me"],
@@ -462,7 +456,7 @@ export const systemsCopy = {
     kicker: "From the lab",
     title: "Life in Weeks",
     description:
-      "An interactive map of a life measured in weeks — what's already gone, and what the remaining ones are claimed by.",
+      "An interactive map of a life measured in weeks: what's already gone, and what the remaining ones are claimed by.",
     cta: "Step inside",
     href: "/projects/life-in-weeks"
   }
@@ -481,11 +475,11 @@ export type OperationEntry = {
 export const operationsCopy = {
   heading: "Where I'm deployed.",
   lede:
-    "The day job, the side desks, and the freelance seats — all running at once, on purpose.",
+    "The day job, the side desks, and the freelance seats, all running at once, on purpose.",
   entries: [
     {
       id: "salaryse",
-      period: "2026 —",
+      period: "2026 onward",
       role: "Founder's Office",
       org: "SalarySe",
       kind: "fintech · Gurugram",
@@ -499,22 +493,22 @@ export const operationsCopy = {
     },
     {
       id: "advisory",
-      period: "2026 —",
+      period: "2026 onward",
       role: "AI Advisor",
       org: "an equity research firm",
       kind: "advisory · India",
       summary:
-        "Advising on where AI actually earns a place in equity research — and where it's just expensive theater.",
+        "Advising on where AI actually earns a place in equity research, and where it's just expensive theater.",
       facts: ["research workflow design", "adoption without the hype"]
     },
     {
       id: "design-desk",
-      period: "2026 —",
+      period: "2026 onward",
       role: "Design & Marketing",
       org: "a real-estate developer",
       kind: "freelance",
       summary:
-        "Brochures, hoardings, and campaign assets for a premium farmhouse estate — type, layout, and narrative, end to end.",
+        "Brochures, hoardings, and campaign assets for a premium farmhouse estate: type, layout, and narrative, end to end.",
       facts: [
         "19-page sales brochure",
         "hoardings & site collateral",
@@ -536,17 +530,17 @@ export const operationsCopy = {
 
 export const longGameCopy = {
   heading: "The long game.",
-  lede: "Some people collect hobbies. I collect exams nobody recommends.",
+  lede: "Four years of pressure, one mountain switch, and the next runways it opened.",
   upsc: {
     kicker: "UPSC Civil Services · 2021–2024",
     stat: "4×",
     statLabel:
-      "consecutive years qualifying Mains — top 1% of 13 lakh+ aspirants, self-prepared, no coaching",
+      "consecutive years qualifying Mains, top 1% of 13 lakh+ aspirants, self-prepared, no coaching",
     years: ["2021", "2022", "2023", "2024"],
     copy:
       "The exam never said yes. The training never left: pattern recognition under pressure, writing at speed, and the habit of building structure out of chaos.",
     vault:
-      "Four years of preparation live on as a linked Obsidian vault — a personal knowledge system I still build on."
+      "Four years of preparation live on as a linked Obsidian vault, a personal knowledge system I still build on."
   },
   pivot: {
     kicker: "Then I switched mountains",
@@ -559,10 +553,10 @@ export const longGameCopy = {
 };
 
 export const approachCopy = {
-  heading: "On approach.",
-  lede: "No single destination. A few runways, all lit.",
+  heading: "Where it points next.",
+  lede: "The same training now has a different job: understand faster, explain cleaner, build in public.",
   themes: {
-    kicker: "Compounding, not converging",
+    kicker: "What stayed from the training",
     items: [
       {
         title: "AI × research",
@@ -582,13 +576,13 @@ export const approachCopy = {
     kicker: "Next runway",
     title: "Business school.",
     body:
-      "The CAT and XAT scores are filed. An MBA chapter is on final approach — formal training to match the field experience."
+      "The CAT and XAT scores are filed. An MBA chapter is on final approach, formal training to match the field experience."
   },
   bench: {
-    kicker: "On the bench",
+    kicker: "Still on the board",
     note: "Sketches, not promises.",
     items: [
-      "Opening the UPSC vault — years of linked notes, made public for aspirants.",
+      "Opening the UPSC vault: years of linked notes, made public for aspirants.",
       "Turning the research pipeline into a tool other people can run.",
       "A video essay series where finance and philosophy stop pretending to be separate."
     ]
@@ -631,7 +625,7 @@ export const channels: Channel[] = [
   {
     id: "nomaaya",
     name: "noMaaya",
-    genre: "Philosophy",
+    genre: "Ideas",
     type: "shorts",
     url: "https://www.youtube.com/@noMaaya",
     channelId: "UCJyzUk_Yr57x9jdoD2VbjRQ",
@@ -643,15 +637,55 @@ export const channels: Channel[] = [
           "Jensen Huang: You Can't Build NVIDIA - Why Ignorance Is a Superpower",
         url: "https://www.youtube.com/shorts/_3YDGP3IYfE",
         posterSrc: "/media/nomaaya-_3YDGP3IYfE.webp",
-        previewSrc: "/media/nomaaya-_3YDGP3IYfE.mp4",
+        previewSrc: "/media/nomaaya-_3YDGP3IYfE-clip.webm",
         publishedAt: "2026-05-26T19:07:39+00:00"
+      },
+      {
+        id: "q8hfP5Zhx4I",
+        title: "This IITian Bet on AI Before the World Did",
+        url: "https://www.youtube.com/shorts/q8hfP5Zhx4I",
+        posterSrc: "/media/nomaaya-q8hfP5Zhx4I.webp",
+        previewSrc: "/media/nomaaya-q8hfP5Zhx4I-clip.webm",
+        publishedAt: "2025-06-24T00:00:00+00:00"
+      },
+      {
+        id: "Vpvi62765kU",
+        title: "Zakir Khan on the Javed Akhtar Quote",
+        url: "https://www.youtube.com/shorts/Vpvi62765kU",
+        posterSrc: "/media/nomaaya-Vpvi62765kU.webp",
+        previewSrc: "/media/nomaaya-Vpvi62765kU-clip.webm",
+        publishedAt: "2026-06-12T21:43:24+00:00"
+      },
+      {
+        id: "k0FGDY1RoYU",
+        title: "Take That Risk",
+        url: "https://www.youtube.com/shorts/k0FGDY1RoYU",
+        posterSrc: "/media/nomaaya-k0FGDY1RoYU.webp",
+        previewSrc: "/media/nomaaya-k0FGDY1RoYU-clip.webm",
+        publishedAt: "2026-06-14T00:00:00+05:30"
+      },
+      {
+        id: "5liOrkm9fNU",
+        title: "The Reality of Motivation - Chris Williamson",
+        url: "https://www.youtube.com/shorts/5liOrkm9fNU",
+        posterSrc: "/media/nomaaya-5liOrkm9fNU.webp",
+        previewSrc: "/media/nomaaya-5liOrkm9fNU-clip.webm",
+        publishedAt: "2025-06-25T00:00:00+00:00"
+      },
+      {
+        id: "EqHlIS6lN4Q",
+        title: "You can't Teach Hunger",
+        url: "https://www.youtube.com/shorts/EqHlIS6lN4Q",
+        posterSrc: "/media/nomaaya-EqHlIS6lN4Q.webp",
+        previewSrc: "/media/nomaaya-EqHlIS6lN4Q-clip.webm",
+        publishedAt: "2025-06-28T12:30:13+00:00"
       },
       {
         id: "JkQaf71KJ10",
         title: "The Real Field Marshall - Sam Manekshaw",
         url: "https://www.youtube.com/shorts/JkQaf71KJ10",
         posterSrc: "/media/nomaaya-JkQaf71KJ10.webp",
-        previewSrc: "/media/nomaaya-JkQaf71KJ10.mp4",
+        previewSrc: "/media/nomaaya-JkQaf71KJ10-clip.webm",
         publishedAt: "2026-04-02T11:20:57+00:00"
       },
       {
@@ -659,16 +693,8 @@ export const channels: Channel[] = [
         title: "Hanuman Jayanti",
         url: "https://www.youtube.com/shorts/1XbuD-DzbuU",
         posterSrc: "/media/nomaaya-1XbuD-DzbuU.webp",
-        previewSrc: "/media/nomaaya-1XbuD-DzbuU.mp4",
+        previewSrc: "/media/nomaaya-1XbuD-DzbuU-clip.webm",
         publishedAt: "2026-02-24T10:45:01+00:00"
-      },
-      {
-        id: "EqHlIS6lN4Q",
-        title: "You can't Teach Hunger",
-        url: "https://www.youtube.com/shorts/EqHlIS6lN4Q",
-        posterSrc: "/media/nomaaya-EqHlIS6lN4Q.webp",
-        previewSrc: "/media/nomaaya-EqHlIS6lN4Q.mp4",
-        publishedAt: "2025-06-28T12:30:13+00:00"
       }
     ]
   }

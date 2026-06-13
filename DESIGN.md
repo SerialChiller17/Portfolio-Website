@@ -45,6 +45,7 @@ Tailwind tokens:
 - Flagship channel uses local 16:9 video without crop mismatch.
 - noMaaya uses short-form previews.
 - No stat padding, no fake metrics, no placeholder channel cards.
+- Do not add decorative or automatic numbers to short grids unless the number itself carries meaning.
 
 ## The Loop
 - Home-page section.
@@ -52,6 +53,7 @@ Tailwind tokens:
 - Watch: horizontal 35mm film strip, keyboard-accessible YouTube frames, build-time thumbnails and metadata.
 - Listen: spinning vinyl and tracklist.
 - Read: tilted dispatch card.
+- Song lists, short lists, and book lists should not show numbers by default. Add numbering only when order or rank is meaningful.
 - Motion respects `prefers-reduced-motion`.
 
 ## Projects

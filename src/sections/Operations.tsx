@@ -52,7 +52,7 @@ export function Operations() {
               <div className="ops-entry-what">
                 <h3>
                   {entry.role}
-                  <em> — {entry.org}</em>
+                  <em> · {entry.org}</em>
                 </h3>
                 <p>{entry.summary}</p>
               </div>
