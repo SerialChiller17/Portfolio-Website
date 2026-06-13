@@ -93,7 +93,6 @@ await writeFile(
   outputPath,
   `${JSON.stringify(
     {
-      generatedAt: new Date().toISOString(),
       videos
     },
     null,
