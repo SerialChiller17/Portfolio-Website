@@ -36,18 +36,29 @@ export function FlightPlan() {
             >
               {siteCopy.flightPlan.heading}
             </motion.h2>
-            <motion.div
-              className="fp-body"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+            <motion.p
+              className="fp-quote"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: shouldReduceMotion ? 0 : 0.12, duration: 0.7, ease: rowEase }}
+              transition={{ delay: shouldReduceMotion ? 0 : 0.08, duration: 0.7, ease: rowEase }}
             >
-              {siteCopy.flightPlan.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </motion.div>
-            <p className="fp-instruction">{siteCopy.flightPlan.instruction}</p>
+              <span className="fp-quote-lead">{siteCopy.flightPlan.quote.lead}</span>
+              <span className="fp-quote-follow">{siteCopy.flightPlan.quote.follow}</span>
+            </motion.p>
+            {siteCopy.flightPlan.body.length > 0 ? (
+              <motion.div
+                className="fp-body"
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: shouldReduceMotion ? 0 : 0.12, duration: 0.7, ease: rowEase }}
+              >
+                {siteCopy.flightPlan.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </motion.div>
+            ) : null}
           </div>
 
           <nav aria-label="Descent chapters" className="fp-plan">

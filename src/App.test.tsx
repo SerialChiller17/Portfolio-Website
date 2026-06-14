@@ -329,14 +329,37 @@ describe("Jay Gupta personal site v3", () => {
       })
     ).toBeInTheDocument();
 
+    expect(
+      within(operations).getByRole("link", {
+        name: "View brochure"
+      })
+    ).toHaveAttribute(
+      "href",
+      "https://docs.google.com/presentation/d/19WAWxXNsudcFvZG9kO784_Q1OkI930WfhLMcutDD99Y/edit?usp=sharing"
+    );
+
     const journeys = screen.getByRole("region", { name: "Journeys" });
     expect(within(journeys).getByText("4×")).toBeInTheDocument();
-    expect(within(journeys).getAllByText(/MAINS ✓/)).toHaveLength(4);
-    expect(within(journeys).getByText(/Obsidian vault/)).toBeInTheDocument();
+    expect(within(journeys).getByText("UPSC Civil Services")).toBeInTheDocument();
+    expect(within(journeys).queryByText(/2021–2024/)).not.toBeInTheDocument();
+    expect(within(journeys).getByText("Top 1% of 13 lakh+").tagName).toBe(
+      "STRONG"
+    );
+    expect(within(journeys).getByText(/in a row\. Self-prepared\./)).toBeInTheDocument();
+    expect(within(journeys).queryByText(/MAINS/)).not.toBeInTheDocument();
+    const yearsRow = journeys.querySelector(".game-years");
+    expect(yearsRow).not.toBeNull();
+    ["2021", "2022", "2023", "2024"].forEach((year) => {
+      expect(within(yearsRow as HTMLElement).getByText(year)).toBeInTheDocument();
+    });
+    expect(yearsRow?.querySelectorAll('[aria-hidden="true"]')).toHaveLength(4);
+    expect(within(journeys).getByText("The exam never said yes. The training never left.")).toBeInTheDocument();
+    expect(within(journeys).getByText(/linked knowledge vault/)).toBeInTheDocument();
     expect(within(journeys).getByText("CAT 2025")).toBeInTheDocument();
     expect(within(journeys).getByText("XAT 2026")).toBeInTheDocument();
     expect(within(journeys).getByText("Where it points next.")).toBeInTheDocument();
-    expect(within(journeys).getByText("Business school.")).toBeInTheDocument();
+    expect(within(journeys).getByText("Exploring, on purpose.")).toBeInTheDocument();
+    expect(within(journeys).getByText(/Content, marketing, a founder's office/)).toBeInTheDocument();
     expect(within(journeys).getByText(/Sketches, not promises/)).toBeInTheDocument();
     expect(screen.queryByRole("region", { name: "Approach" })).not.toBeInTheDocument();
   });

@@ -6,6 +6,17 @@ import { Approach } from "./Approach";
 const blockEase = [0.16, 1, 0.3, 1] as const;
 const band = descentBands.find((entry) => entry.id === "journeys");
 
+function ExamDetail({ detail }: { detail: string }) {
+  const [value, ...rest] = detail.split(" ");
+
+  return (
+    <span className="game-exam-detail">
+      <b>{value}</b>
+      {rest.length > 0 ? ` ${rest.join(" ")}` : null}
+    </span>
+  );
+}
+
 function Contours() {
   return (
     <svg
@@ -64,14 +75,19 @@ export function LongGame() {
             <p className="game-kicker">{longGameCopy.upsc.kicker}</p>
             <div className="game-stat-row">
               <span className="game-stat">{longGameCopy.upsc.stat}</span>
-              <p className="game-stat-label">{longGameCopy.upsc.statLabel}</p>
+              <p className="game-stat-label">
+                <strong>{longGameCopy.upsc.statHighlight}</strong>,{" "}
+                {longGameCopy.upsc.statBody}
+              </p>
             </div>
 
-            <div aria-label="Mains qualified, year by year" className="game-years">
+            <div aria-label="Qualified years" className="game-years">
               {longGameCopy.upsc.years.map((year) => (
                 <span className="game-year" key={year}>
                   <b>{year}</b>
-                  <small>MAINS ✓</small>
+                  <span aria-hidden="true" className="game-year-check">
+                    ✓
+                  </span>
                 </span>
               ))}
             </div>
@@ -107,7 +123,7 @@ export function LongGame() {
                     {exam.value}
                     <small>{exam.suffix}</small>
                   </span>
-                  <span className="game-exam-detail">{exam.detail}</span>
+                  <ExamDetail detail={exam.detail} />
                 </div>
               ))}
             </div>

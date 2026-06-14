@@ -56,11 +56,36 @@ export function Operations() {
                 </h3>
                 <p>{entry.summary}</p>
               </div>
-              <ul className="ops-entry-facts" aria-label="Highlights">
-                {entry.facts.map((fact) => (
-                  <li key={fact}>{fact}</li>
-                ))}
-              </ul>
+              <div className="ops-entry-side">
+                {entry.facts.length > 0 ? (
+                  <ul className="ops-entry-facts" aria-label="Highlights">
+                    {entry.facts.map((fact) => (
+                      <li key={fact}>{fact}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                {entry.asset ? (
+                  <a
+                    aria-label={entry.asset.label}
+                    className="ops-asset-preview focus-ring"
+                    href={entry.asset.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <span className="ops-asset-frame" aria-hidden="true">
+                      <iframe
+                        loading="lazy"
+                        src={entry.asset.previewHref}
+                        tabIndex={-1}
+                        title="Brochure preview"
+                      />
+                    </span>
+                    <span className="ops-asset-caption">
+                      <b>{entry.asset.label}</b>
+                    </span>
+                  </a>
+                ) : null}
+              </div>
             </motion.article>
           ))}
         </div>

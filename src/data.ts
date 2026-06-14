@@ -300,14 +300,11 @@ export const siteCopy = {
   flightPlan: {
     kicker: "The flight plan",
     heading: "Jack of all trades",
-    body: [
-      "Master of none, though oftentimes better than master of one.",
-      "Most people optimize for a lane. I optimized for range.",
-      "From finance and ideas to AI systems, business operations, and creative work, each pursuit added another lens through which to understand the world.",
-      "Viewed separately, they seem unrelated.",
-      "Viewed together, they tell a single story: curiosity followed by execution."
-    ],
-    instruction: "The descent, in chapters. Jump to any altitude."
+    quote: {
+      lead: "Master of none,",
+      follow: "but still better than master of one."
+    },
+    body: []
   },
   channelsHeading: [
     { text: "What I", className: "text-cream" },
@@ -470,6 +467,11 @@ export type OperationEntry = {
   kind: string;
   summary: string;
   facts: string[];
+  asset?: {
+    label: string;
+    href: string;
+    previewHref: string;
+  };
 };
 
 export const operationsCopy = {
@@ -508,12 +510,14 @@ export const operationsCopy = {
       org: "a real-estate developer",
       kind: "freelance",
       summary:
-        "Brochures, hoardings, and campaign assets for a premium farmhouse estate: type, layout, and narrative, end to end.",
-      facts: [
-        "19-page sales brochure",
-        "hoardings & site collateral",
-        "launch campaign assets"
-      ]
+        "Brochures, hoardings, and media campaign - end to end.",
+      facts: [],
+      asset: {
+        label: "View brochure",
+        href: "https://docs.google.com/presentation/d/19WAWxXNsudcFvZG9kO784_Q1OkI930WfhLMcutDD99Y/edit?usp=sharing",
+        previewHref:
+          "https://docs.google.com/presentation/d/19WAWxXNsudcFvZG9kO784_Q1OkI930WfhLMcutDD99Y/preview"
+      }
     },
     {
       id: "upsc-desk",
@@ -532,15 +536,14 @@ export const longGameCopy = {
   heading: "The long game.",
   lede: "Four years of pressure, one mountain switch, and the next runways it opened.",
   upsc: {
-    kicker: "UPSC Civil Services · 2021–2024",
+    kicker: "UPSC Civil Services",
     stat: "4×",
-    statLabel:
-      "consecutive years qualifying Mains, top 1% of 13 lakh+ aspirants, self-prepared, no coaching",
+    statHighlight: "Top 1% of 13 lakh+",
+    statBody: "in a row. Self-prepared.",
     years: ["2021", "2022", "2023", "2024"],
-    copy:
-      "The exam never said yes. The training never left: pattern recognition under pressure, writing at speed, and the habit of building structure out of chaos.",
+    copy: "The exam never said yes. The training never left.",
     vault:
-      "Four years of preparation live on as a linked Obsidian vault, a personal knowledge system I still build on."
+      "Four years of prep live on as a linked knowledge vault I still build on."
   },
   pivot: {
     kicker: "Then I switched mountains",
@@ -573,10 +576,10 @@ export const approachCopy = {
     ]
   },
   runway: {
-    kicker: "Next runway",
-    title: "Business school.",
+    kicker: "Runways open",
+    title: "Exploring, on purpose.",
     body:
-      "The CAT and XAT scores are filed. An MBA chapter is on final approach, formal training to match the field experience."
+      "Content, marketing, a founder's office, a startup, or B-school, each a live runway. The plan isn't to pick fast. It's to commit hard once the right one is clear."
   },
   bench: {
     kicker: "Still on the board",

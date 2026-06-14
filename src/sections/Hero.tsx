@@ -195,7 +195,7 @@ export function Hero() {
         <div className="hero-gradient" />
         <div className="hero-glow" />
         <div className="hero-spotlight" />
-        <div className="noise-overlay opacity-[0.82] mix-blend-overlay" />
+        <div className="noise-overlay opacity-[0.58] mix-blend-overlay" />
         <div className="hero-vignette" />
 
         <div className="hero-content">

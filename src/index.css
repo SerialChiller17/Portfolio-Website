@@ -451,30 +451,30 @@ body {
     min-height: 100dvh;
     width: 100%;
     box-shadow:
-      inset 0 -22rem 18rem rgba(0, 0, 0, 0.48),
+      inset 0 -20rem 16rem rgba(0, 0, 0, 0.36),
       0 2rem 8rem rgba(241, 239, 229, 0.03);
   }
 
   .hero-video {
     @apply absolute inset-0 z-0 h-full w-full object-cover;
     background: #000000;
-    filter: saturate(1.04) contrast(1.03) brightness(0.92);
+    filter: saturate(1.06) contrast(1.02) brightness(0.98);
   }
 
   .hero-video-vignette {
     @apply pointer-events-none absolute inset-0 z-[1];
     background:
-      radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(0, 0, 0, 0.08) 67%, rgba(0, 0, 0, 0.42) 100%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 17%, transparent 82%, rgba(0, 0, 0, 0.18)),
-      linear-gradient(180deg, rgba(0, 0, 0, 0.16), transparent 30%, rgba(0, 0, 0, 0.52));
+      radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(0, 0, 0, 0.05) 70%, rgba(0, 0, 0, 0.28) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 17%, transparent 84%, rgba(0, 0, 0, 0.1)),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent 34%, rgba(0, 0, 0, 0.34));
   }
 
   .hero-gradient {
     @apply pointer-events-none absolute inset-0 z-[2];
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.16) 16%, transparent 36%),
-      radial-gradient(circle at 17% 84%, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.56) 28%, transparent 60%),
-      linear-gradient(0deg, rgba(0, 0, 0, 0.34), transparent 36%);
+      linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.11) 16%, transparent 38%),
+      radial-gradient(circle at 17% 84%, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.42) 28%, transparent 62%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.22), transparent 38%);
   }
 
   .hero-glow {
@@ -509,8 +509,8 @@ body {
   .hero-vignette {
     @apply pointer-events-none absolute inset-0 z-[6];
     background:
-      radial-gradient(ellipse at 55% 45%, transparent 58%, rgba(0, 0, 0, 0.26) 100%),
-      linear-gradient(180deg, rgba(0, 0, 0, 0.08), transparent 36%, rgba(0, 0, 0, 0.68));
+      radial-gradient(ellipse at 55% 45%, transparent 62%, rgba(0, 0, 0, 0.16) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent 38%, rgba(0, 0, 0, 0.48));
   }
 
   .hero-nav {
@@ -3577,7 +3577,7 @@ body {
 
   .loop-reel-note {
     position: absolute;
-    top: clamp(128px, 14vw, 214px);
+    top: clamp(206px, 14vw, 214px);
     right: clamp(10px, 5vw, 72px);
     z-index: 2;
     width: min(360px, 32vw);
@@ -5227,6 +5227,7 @@ body {
   .fp-intro {
     position: sticky;
     top: 110px;
+    align-self: center;
   }
 
   .fp-heading {
@@ -5235,17 +5236,47 @@ body {
     font-size: clamp(2.9rem, 6vw, 5.1rem);
     font-style: italic;
     font-weight: 400;
-    letter-spacing: -0.015em;
+    letter-spacing: 0;
     line-height: 0.96;
     text-wrap: balance;
   }
 
+  .fp-quote {
+    width: fit-content;
+    max-width: min(100%, 48rem);
+    margin: clamp(4px, 1.1vw, 13px) 0 0 clamp(18px, 4.2vw, 58px);
+  }
+
+  .fp-quote-lead {
+    display: block;
+    color: var(--color-gold-bright);
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: clamp(2.4rem, 5.05vw, 4rem);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.86;
+  }
+
+  .fp-quote-follow {
+    display: block;
+    margin-top: clamp(2px, 0.4vw, 7px);
+    margin-left: clamp(44px, 7vw, 104px);
+    color: rgba(241, 239, 229, 0.82);
+    font-size: clamp(1.05rem, 1.8vw, 1.55rem);
+    font-weight: 400;
+    line-height: 1.12;
+    white-space: nowrap;
+  }
+
   .fp-body {
-    margin-top: 22px;
-    max-width: 54ch;
+    margin-top: clamp(16px, 2vw, 24px);
+    margin-left: calc(clamp(18px, 4.2vw, 58px) + clamp(44px, 7vw, 104px));
+    max-width: 72ch;
     color: rgba(241, 239, 229, 0.72);
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.68;
+    white-space: nowrap;
   }
 
   .fp-body p {
@@ -5253,16 +5284,7 @@ body {
   }
 
   .fp-body p + p {
-    margin-top: 0.95rem;
-  }
-
-  .fp-instruction {
-    margin-top: 30px;
-    color: var(--color-gold-bright);
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    margin-top: 0;
   }
 
   .fp-plan {
@@ -5745,6 +5767,12 @@ body {
     line-height: 1.7;
   }
 
+  .ops-entry-side {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+  }
+
   .ops-entry-facts {
     display: grid;
     align-content: start;
@@ -5768,6 +5796,63 @@ body {
     position: absolute;
     left: 0;
     color: var(--color-gold);
+  }
+
+  .ops-asset-preview {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    max-width: 390px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ops-asset-frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid rgba(241, 239, 229, 0.16);
+    background:
+      linear-gradient(135deg, rgba(221, 184, 119, 0.16), transparent 38%),
+      rgba(241, 239, 229, 0.035);
+  }
+
+  .ops-asset-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.32);
+    pointer-events: none;
+  }
+
+  .ops-asset-frame iframe {
+    width: 400%;
+    height: 470%;
+    border: 0;
+    pointer-events: none;
+    transform: scale(0.25);
+    transform-origin: top left;
+  }
+
+  .ops-asset-caption {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .ops-asset-caption b {
+    color: var(--color-gold-bright);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .ops-asset-preview:hover .ops-asset-frame {
+    border-color: rgba(221, 184, 119, 0.46);
   }
 
   /* ---------------------------------------------------- long game -- */
@@ -5835,6 +5920,7 @@ body {
 
   .game-upsc {
     grid-area: upsc;
+    padding: clamp(14px, 1.55vw, 18px) clamp(15px, 1.8vw, 20px);
   }
 
   .game-kicker,
@@ -5848,41 +5934,48 @@ body {
 
   .game-stat-row {
     display: flex;
-    align-items: baseline;
-    gap: clamp(14px, 2vw, 24px);
-    margin-top: 16px;
+    align-items: center;
+    gap: clamp(12px, 1.6vw, 18px);
+    margin-top: 10px;
   }
 
   .game-stat {
     color: #F1EFE5;
     font-family: "Instrument Serif", Georgia, serif;
-    font-size: clamp(3.8rem, 6.6vw, 6.2rem);
+    font-size: clamp(3.25rem, 5.5vw, 5rem);
     line-height: 0.82;
     letter-spacing: -0.02em;
   }
 
   .game-stat-label {
-    max-width: 30ch;
+    max-width: 23ch;
     color: rgba(241, 239, 229, 0.66);
-    font-size: 13.5px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.34;
+  }
+
+  .game-stat-label strong {
+    color: var(--color-gold-bright);
+    font-weight: 600;
   }
 
   .game-years {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
+    flex-wrap: nowrap;
+    gap: 5px;
+    margin-top: 10px;
   }
 
   .game-year {
-    display: grid;
-    gap: 4px;
-    justify-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     border: 1px dashed rgba(241, 239, 229, 0.28);
-    border-radius: 9px;
+    border-radius: 8px;
     background: rgba(241, 239, 229, 0.02);
-    padding: 8px 12px 7px;
+    min-height: 25px;
+    padding: 3px 8px;
     transform: rotate(var(--stamp-tilt, -1.1deg));
     transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -5898,37 +5991,37 @@ body {
   .game-year b {
     color: #F1EFE5;
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.08em;
   }
 
-  .game-year small {
+  .game-year-check {
     color: var(--color-gold-bright);
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 8px;
-    letter-spacing: 0.22em;
+    font-size: 10px;
+    line-height: 1;
   }
 
   .game-copy {
-    margin-top: 17px;
-    max-width: 58ch;
+    margin-top: 10px;
+    max-width: 40ch;
     color: rgba(241, 239, 229, 0.72);
-    font-size: 14.5px;
-    line-height: 1.75;
+    font-size: 13.5px;
+    line-height: 1.48;
   }
 
   .game-vault {
     display: flex;
-    gap: 11px;
-    margin-top: 14px;
-    border-top: 1px solid rgba(197, 152, 86, 0.34);
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 9px;
     color: rgba(241, 239, 229, 0.58);
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 11.5px;
-    line-height: 1.65;
-    padding-top: 11px;
-    max-width: 56ch;
+    font-size: 10.4px;
+    line-height: 1.45;
+    max-width: 62ch;
+    white-space: normal;
   }
 
   .game-vault-glyph {
@@ -5939,22 +6032,22 @@ body {
     grid-area: pivot;
     display: flex;
     flex-direction: column;
-    padding-block: clamp(16px, 1.9vw, 22px);
+    padding: clamp(14px, 1.6vw, 20px) clamp(16px, 2vw, 22px);
   }
 
   .game-pivot-line {
-    margin-top: 12px;
+    margin-top: 9px;
     color: #F1EFE5;
     font-family: "Instrument Serif", Georgia, serif;
-    font-size: clamp(1.45rem, 2.2vw, 1.8rem);
+    font-size: clamp(1.32rem, 2vw, 1.62rem);
     font-style: italic;
-    line-height: 1.1;
+    line-height: 1.04;
   }
 
   .game-exams {
     display: grid;
     gap: 0;
-    margin-top: clamp(16px, 2vw, 22px);
+    margin-top: clamp(12px, 1.5vw, 17px);
     padding-top: 0;
   }
 
@@ -5965,16 +6058,16 @@ body {
       "name value"
       "detail value";
     border-top: 1px solid rgba(241, 239, 229, 0.1);
-    padding: 10px 2px;
-    column-gap: 16px;
+    padding: 8px 2px;
+    column-gap: 14px;
   }
 
   .game-exam-name {
     grid-area: name;
     color: rgba(241, 239, 229, 0.55);
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 10px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
@@ -5983,7 +6076,7 @@ body {
     align-self: center;
     color: #F1EFE5;
     font-family: "Instrument Serif", Georgia, serif;
-    font-size: clamp(2rem, 3.2vw, 2.65rem);
+    font-size: clamp(1.82rem, 2.85vw, 2.35rem);
     line-height: 0.9;
   }
 
@@ -5991,17 +6084,22 @@ body {
     margin-left: 5px;
     color: var(--color-gold-bright);
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.06em;
   }
 
   .game-exam-detail {
     grid-area: detail;
-    margin-top: 6px;
+    margin-top: 4px;
     color: rgba(241, 239, 229, 0.4);
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .game-exam-detail b {
+    color: rgba(241, 239, 229, 0.6);
+    font-weight: 600;
   }
 
   /* ----------------------------------------------------- approach -- */
@@ -6280,6 +6378,12 @@ body {
     .sys-lede {
       white-space: nowrap;
     }
+
+    .game-upsc {
+      justify-self: start;
+      margin-top: clamp(120px, 10vw, 152px);
+      width: min(100%, clamp(29rem, 37vw, 34rem));
+    }
   }
 
   @media (max-width: 880px) {
@@ -6339,14 +6443,31 @@ body {
       display: none;
     }
 
+    .fp-body {
+      margin-left: 0;
+      white-space: normal;
+    }
+
     .game-stat-row {
       flex-direction: column;
-      gap: 14px;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .game-vault {
+      align-items: flex-start;
+      white-space: normal;
     }
 
     .about-timeline-stop {
       grid-template-columns: 84px minmax(0, 1fr);
       gap: 14px;
+    }
+  }
+
+  @media (max-width: 340px) {
+    .game-years {
+      flex-wrap: wrap;
     }
   }
 }
